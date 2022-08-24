@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { createContext } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 
-const DataContext = createContext();
+export const DataContext = createContext();
+export const AllData = () => useContext(DataContext);
 
 const Context = ({ children }) => {
-  const [data, setData] = useState([]);
+  const [res, setRes] = useState([]);
 
   const getData = () => {
-    fetch("https://wordsapiv1.p.mashape.com/words")
+    fetch("https://jsonplaceholder.typicode.com/todos")
       .then((response) => response.json())
-      .then((res) => {
-        setData(res);
+      .then((data) => {
+        const res = data.slice(0, 10);
+        setRes(res);
       });
   };
 
   useEffect(() => {
     getData();
-  }, [data]);
+  }, []);
 
-  return <DataContext.Provider>{children}</DataContext.Provider>;
+  return (
+    <DataContext.Provider value={[res, setRes]}>
+      {children}
+    </DataContext.Provider>
+  );
 };
 
 export default Context;

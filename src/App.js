@@ -1,6 +1,6 @@
 import './App.css';
 import Cars from './components/car';
-import { Block } from './components/style';
+import { Block } from './components/car/style';
 
 function App() {
   

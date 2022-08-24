@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
-import { Car, Wrapper } from "../style";
+import { Car, Wrapper } from "./style";
 const car = "https://data.typeracer.com/public/images/avatars/mobil3.svg";
 const Cars = () => {
   const input = useRef("");
 
-  const [pressed, setPressed] = useState(-500);
+  const [pressed, setPressed] = useState(-300);
   const [words, setWords] = useState([
     "salom",
     "hey",
@@ -28,7 +28,7 @@ const Cars = () => {
   const clearInput = (e) => {
     if (e.keyCode === 32) {
       input.current.value = "";
-      setInputVl("");
+      // setInputVl("");
     }
   };
 
