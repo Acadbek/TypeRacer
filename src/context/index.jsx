@@ -10,7 +10,7 @@ const Context = ({ children }) => {
     fetch("https://jsonplaceholder.typicode.com/todos")
       .then((response) => response.json())
       .then((data) => {
-        const res = data.slice(0, 10);
+        const res = data.slice(0, 100);
         setRes(res);
       });
   };
