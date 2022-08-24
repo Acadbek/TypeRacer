@@ -6,7 +6,7 @@ export const Block = styled.div`
 	align-items: center;
 	height: 100vh
 `
-export const Car = styled.div`
+export const WrapperCar = styled.div`
 	transform:  translateX(${({ pressed }) => pressed ? pressed + 'px' : 0})
 `
 export const Wrapper = styled.div`
