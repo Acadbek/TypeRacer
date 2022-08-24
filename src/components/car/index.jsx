@@ -1,23 +1,34 @@
 import React, { useState, useRef } from "react";
-import { Car } from "../style";
+import { Car, Wrapper } from "../style";
 const car = "https://data.typeracer.com/public/images/avatars/mobil3.svg";
-const pressed = 0;
 const Cars = () => {
-  const input = useRef();
+  const input = useRef("");
 
-  const [words, setWords] = useState(["salom", "hey", "hi"]);
-  const [inputVl, setInputVl] = useState("");
+  const [pressed, setPressed] = useState(-500);
+  const [words, setWords] = useState([
+    "salom",
+    "hey",
+    "hi",
+    "vey",
+    "say",
+    "something",
+    "set",
+  ]);
+  const [inputVl, setInputVl] = useState();
 
   const getInputVl = ({ target }) => {
     setInputVl(target.value);
     if (words.includes(inputVl)) {
-      console.log(inputVl);
+      setPressed((prev) => {
+        return prev + 40;
+      });
     }
   };
 
   const clearInput = (e) => {
     if (e.keyCode === 32) {
       input.current.value = "";
+      setInputVl("");
     }
   };
 
@@ -26,9 +37,11 @@ const Cars = () => {
       <Car pressed={pressed}>
         <img style={{ width: "100px" }} src={car} alt="Card" />
       </Car>
-      {words.map((text, index) => (
-        <p key={index}>{text}</p>
-      ))}
+      <Wrapper>
+        {words.map((text, index) => (
+          <p key={index}>{text}</p>
+        ))}
+      </Wrapper>
       <input
         ref={input}
         onKeyDown={clearInput}

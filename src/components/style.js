@@ -7,5 +7,9 @@ export const Block = styled.div`
 	height: 100vh
 `
 export const Car = styled.div`
-transform:  translateX(${({ pressed }) => pressed ? pressed + 'px' : ''})
+	transform:  translateX(${({ pressed }) => pressed ? pressed + 'px' : 0})
+`
+export const Wrapper = styled.div`
+	display: flex;
+	gap: 10px;
 `
