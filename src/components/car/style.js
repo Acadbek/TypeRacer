@@ -11,5 +11,21 @@ export const WrapperCar = styled.div`
 `
 export const Wrapper = styled.div`
 	display: flex;
-	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	max-width: 1000px;	
+	margin: 40px auto;
+`
+
+export const Text = styled.div`
+color: ${({ completed }) => completed ? 'green' : 'red'}};
+font-size: 20px;
+`
+
+export const Input = styled.input`
+width: 400px;
+padding: 10px; 10px;
+border: solid green 3px;
+border-radius: 4px;
+outline: none;
 `

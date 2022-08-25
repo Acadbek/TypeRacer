@@ -6,17 +6,12 @@ export const AllData = () => useContext(DataContext);
 const Context = ({ children }) => {
   const [res, setRes] = useState([]);
 
-  const getData = () => {
+  useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/todos")
       .then((response) => response.json())
       .then((data) => {
-        const res = data.slice(0, 100);
-        setRes(res);
+        setRes(data.slice(0, 100));
       });
-  };
-
-  useEffect(() => {
-    getData();
   }, []);
 
   return (

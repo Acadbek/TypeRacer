@@ -1,24 +1,17 @@
 import React, { useState, useRef } from "react";
-import { WrapperCar, Wrapper } from "../components/car/style";
+import { WrapperCar, Wrapper, Text, Input } from "../components/car/style";
 import Car from "../components/car";
-import { AllData } from "../context";
+import { data } from "../mock";
+// import { AllData } from "../context";
 const carImg = "https://data.typeracer.com/public/images/avatars/mobil3.svg";
 
 const PlayGround = () => {
-  const [data] = AllData();
+  // const [data] = AllData();
 
   const input = useRef("");
-  const [pressed, setPressed] = useState(-300);
-  const [words] = useState([
-    "salom",
-    "hey",
-    "hi",
-    "vey",
-    "say",
-    "something",
-    "set",
-  ]);
-
+  const [pressed, setPressed] = useState(-400);
+  const [completed, setCompleted] = useState(false);
+  const [words, setWords] = useState(data);
   const sliceText = (text) => {
     return text.split(" ")[0];
   };
@@ -32,19 +25,19 @@ const PlayGround = () => {
     return finalWord;
   };
 
-  const getInputVl = ({ target }) => {
-    setInputVl(target.value);
-    // if (words.includes(inputVl)) {
-    //   setPressed((prev) => {
-    //     return prev + 40;
-    //   });
-    // }
-  };
-
   const clearInput = (e) => {
-    if (e.keyCode === 32) {
+    if (e.keyCode === 32 || e.keyCode === 13) {
+      words.forEach((t) => {
+        t.split(" ").forEach((e) => {
+          if (e === inputVl) {
+            setPressed((prev) => {
+              return prev + 40;
+            });
+            setCompleted(true);
+          }
+        });
+      });
       input.current.value = "";
-      // setInputVl("");
     }
   };
 
@@ -54,15 +47,18 @@ const PlayGround = () => {
         <Car img={carImg} />
       </WrapperCar>
       <Wrapper>
-        {randomText(
-          data.map((val, idx) => <p key={idx}>{sliceText(val.title)}</p>)
-        )}
+        {words.map((val, idx) => (
+          <Text completed={completed} key={idx}>
+            {val}
+          </Text>
+        ))}
       </Wrapper>
-      <input
+      <Input	
+        style={{ marginTop: "10px" }}
         ref={input}
         onKeyDown={clearInput}
         type="text"
-        onChange={getInputVl}
+        onChange={({ target }) => setInputVl(target.value.trim())}
       />
     </div>
   );
